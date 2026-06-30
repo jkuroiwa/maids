@@ -32,10 +32,17 @@
   </div>
 </div>
 
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar">
+  Serving all of Oahu for over 30 years &nbsp;|&nbsp; <a href="mailto:maidsofhonolulu@gmail.com">maidsofhonolulu@gmail.com</a>
+</div>
+
 <!-- NAVBAR -->
 <nav class="navbar" role="navigation">
   <div class="container">
-    <a href="index.html" class="navbar-brand"><span>Maids of Honolulu</span></a>
+    <a href="index.html" class="navbar-brand">
+      <img src="https://maidsofhonolulu.com/wp-content/uploads/maids-media/the-maids-logo.jpg" alt="The Maids of Honolulu">
+    </a>
     <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -44,7 +51,7 @@
       <li><a href="jobs.html">Cleaning Jobs</a></li>
       <li><a href="contact.html">Contact Us</a></li>
     </ul>
-    <div class="nav-cta"><a href="#estimate-form" class="btn btn-primary">Free Estimate</a></div>
+    <div class="nav-cta"><a href="tel:8089428080" class="btn btn-primary">📞 Call (808) 942-8080</a></div>
   </div>
 </nav>
 
@@ -63,20 +70,14 @@
 
       <!-- FORM -->
       <div>
-        <h2 style="color:var(--teal-dk); margin-bottom:.5rem;">Get Your Free Estimate</h2>
-        <p style="margin-bottom:1.5rem; color:var(--gray);">Fill out the form and we'll get back to you within one business day with a personalized quote. New customers save $50!</p>
+        <h2 style="color:var(--navy-dk); margin-bottom:.5rem;">Get Your Free Estimate</h2>
+        <p style="margin-bottom:1.5rem; color:var(--gray);">Fill out the form and we'll get back to you within one business day. New customers save $50!</p>
 
         <div class="form-success" id="estimate-form-success">
           ✅ Thank you! We'll be in touch within one business day with your free estimate.
         </div>
 
-        <form
-          name="free-estimate"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          action="contact.html?form=success#estimate-form"
-        >
+        <form name="free-estimate" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="contact.html?form=success#estimate-form">
           <input type="hidden" name="form-name" value="free-estimate">
           <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
 
@@ -90,7 +91,6 @@
               <input type="text" id="c-last" name="last_name" required placeholder="Nakamura">
             </div>
           </div>
-
           <div class="form-row">
             <div class="form-group">
               <label for="c-phone">Phone Number *</label>
@@ -101,12 +101,10 @@
               <input type="email" id="c-email" name="email" required placeholder="you@email.com">
             </div>
           </div>
-
           <div class="form-group">
             <label for="c-address">Home Address / Neighborhood *</label>
-            <input type="text" id="c-address" name="address" required placeholder="e.g., 123 Kalakaua Ave, Honolulu or Kailua area">
+            <input type="text" id="c-address" name="address" required placeholder="e.g., Kailua, Hawaii Kai, Pearl City…">
           </div>
-
           <div class="form-row">
             <div class="form-group">
               <label for="c-home-size">Home Size</label>
@@ -132,12 +130,10 @@
               </select>
             </div>
           </div>
-
           <div class="form-group">
             <label for="c-message">Anything Else We Should Know?</label>
             <textarea id="c-message" name="message" placeholder="Pets, allergies, specific areas of concern, preferred days/times…"></textarea>
           </div>
-
           <button type="submit" class="btn btn-primary" style="width:100%; font-size:1.05rem; padding:.85rem;">Request My Free Estimate</button>
           <p style="font-size:.82rem; color:var(--gray); text-align:center; margin-top:.75rem;">No obligation. We respond within 1 business day.</p>
         </form>
@@ -147,7 +143,6 @@
       <div>
         <div class="contact-info-card">
           <h3>Get in Touch</h3>
-
           <div class="contact-info-item">
             <span class="icon">📞</span>
             <div>
@@ -156,7 +151,6 @@
               <span style="font-size:.85rem; opacity:.8;">Mon–Sat, 8am–5pm HST</span>
             </div>
           </div>
-
           <div class="contact-info-item">
             <span class="icon">✉️</span>
             <div>
@@ -164,7 +158,6 @@
               <a href="mailto:maidsofhonolulu@gmail.com">maidsofhonolulu@gmail.com</a>
             </div>
           </div>
-
           <div class="contact-info-item">
             <span class="icon">📍</span>
             <div>
@@ -175,21 +168,26 @@
           </div>
         </div>
 
-        <div style="background:var(--off-wh); border-radius:var(--radius); padding:1.75rem; margin-top:1.5rem;">
-          <h3 style="color:var(--teal-dk); margin-bottom:1rem;">🌺 New Customer Offer</h3>
-          <p>Mention this offer when you call or submit the form to claim your savings:</p>
+        <div style="margin-top:1.25rem; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);">
+          <img src="https://maidsofhonolulu.com/wp-content/uploads/maids-original/20230116_GJP_1322_RT_LoRes_Web-1920w.jpg"
+               alt="Maids of Honolulu professional cleaner"
+               style="width:100%; height:220px; object-fit:cover; display:block;">
+        </div>
+
+        <div style="background:var(--off-wh); border-radius:var(--radius); padding:1.75rem; margin-top:1.25rem;">
+          <h3 style="color:var(--navy-dk); margin-bottom:1rem;">🌺 New Customer Offer</h3>
           <ul class="checklist" style="margin-top:.75rem;">
             <li><strong>$10 off</strong> your 1st cleaning</li>
             <li><strong>$20 off</strong> your 2nd cleaning</li>
             <li><strong>$20 off</strong> your 3rd cleaning</li>
           </ul>
-          <p style="margin-top:.75rem; font-size:.9rem; color:var(--gray);">That's <strong>$50 in total savings</strong> for new customers. Valid for recurring service only.</p>
+          <p style="margin-top:.75rem; font-size:.9rem; color:var(--gray);"><strong>$50 total savings</strong> for new customers. Valid for recurring service.</p>
         </div>
 
         <div style="background:var(--off-wh); border-radius:var(--radius); padding:1.75rem; margin-top:1rem;">
-          <h3 style="color:var(--teal-dk); margin-bottom:.75rem;">Looking for a Job?</h3>
-          <p style="margin-bottom:1rem; font-size:.9rem;">If you're interested in joining our cleaning team, visit our jobs page.</p>
-          <a href="jobs.html#apply" class="btn btn-teal" style="display:block; text-align:center;">View Cleaning Jobs</a>
+          <h3 style="color:var(--navy-dk); margin-bottom:.75rem;">Looking for a Job?</h3>
+          <p style="margin-bottom:1rem; font-size:.9rem;">Interested in joining our cleaning team? Visit our jobs page.</p>
+          <a href="jobs.html#apply" class="btn btn-navy" style="display:block; text-align:center;">View Cleaning Jobs</a>
         </div>
       </div>
 
@@ -214,8 +212,13 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <h3>Maids of Honolulu</h3>
+        <img src="https://maidsofhonolulu.com/wp-content/uploads/maids-media/the-maids-logo.jpg" alt="The Maids of Honolulu">
         <p>Professional residential cleaning for all of Oahu. Insured, eco-friendly, and proud to serve our island community with aloha.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><img src="https://maidsofhonolulu.com/wp-content/themes/maids-modern/assets/icons/facebook.svg" alt="Facebook"></a>
+          <a href="#" aria-label="Yelp"><img src="https://maidsofhonolulu.com/wp-content/themes/maids-modern/assets/icons/yelp.svg" alt="Yelp"></a>
+          <a href="#" aria-label="Google Business"><img src="https://maidsofhonolulu.com/wp-content/themes/maids-modern/assets/icons/google-business.svg" alt="Google Business"></a>
+        </div>
       </div>
       <div class="footer-col">
         <h4>Pages</h4>
@@ -234,6 +237,12 @@
           <li><a href="services/bathroom.html">Bathroom Cleaning</a></li>
           <li><a href="services/allrooms.html">All-Room Cleaning</a></li>
         </ul>
+        <h4 style="margin-top:1.25rem;">We Accept</h4>
+        <div class="footer-payments">
+          <img src="https://maidsofhonolulu.com/wp-content/uploads/maids-media/visa.png" alt="Visa">
+          <img src="https://maidsofhonolulu.com/wp-content/uploads/maids-media/mastercard.png" alt="Mastercard">
+          <img src="https://maidsofhonolulu.com/wp-content/uploads/maids-media/cash.png" alt="Cash">
+        </div>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
