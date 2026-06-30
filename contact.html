@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Maids of Honolulu</title>
+  <meta name="description" content="Get a free estimate from Maids of Honolulu. Call (808) 942-8080 or fill out our online form. Serving all of Oahu.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- POPUP -->
+<div class="popup-overlay hidden" id="offerPopup" role="dialog" aria-modal="true">
+  <div class="popup-box">
+    <div class="popup-header" style="position:relative;">
+      <button class="popup-close" aria-label="Close">&times;</button>
+      <div class="promo-badge">$50</div>
+      <h2>Welcome Gift for New Customers!</h2>
+    </div>
+    <div class="popup-body">
+      <p>Start fresh with the Maids of Honolulu. Here's our way of saying <em>aloha</em>:</p>
+      <ul class="popup-offer-list">
+        <li><strong>$10 off</strong> your 1st cleaning</li>
+        <li><strong>$20 off</strong> your 2nd cleaning</li>
+        <li><strong>$20 off</strong> your 3rd cleaning</li>
+      </ul>
+      <div class="popup-actions">
+        <button class="btn btn-primary popup-cta">Claim My Offer — Get a Free Estimate</button>
+        <button class="popup-dismiss">No thanks, I'll pay full price</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" role="navigation">
+  <div class="container">
+    <a href="index.html" class="navbar-brand"><span>Maids of Honolulu</span></a>
+    <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About &amp; FAQs</a></li>
+      <li><a href="services.html">Cleaning Services</a></li>
+      <li><a href="jobs.html">Cleaning Jobs</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <div class="nav-cta"><a href="#estimate-form" class="btn btn-primary">Free Estimate</a></div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Contact Us</h1>
+    <p>Ready for a cleaner home? Get your free estimate or just ask us a question — we're here to help.</p>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="section" id="estimate-form">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- FORM -->
+      <div>
+        <h2 style="color:var(--teal-dk); margin-bottom:.5rem;">Get Your Free Estimate</h2>
+        <p style="margin-bottom:1.5rem; color:var(--gray);">Fill out the form and we'll get back to you within one business day with a personalized quote. New customers save $50!</p>
+
+        <div class="form-success" id="estimate-form-success">
+          ✅ Thank you! We'll be in touch within one business day with your free estimate.
+        </div>
+
+        <form
+          name="free-estimate"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          action="contact.html?form=success#estimate-form"
+        >
+          <input type="hidden" name="form-name" value="free-estimate">
+          <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="c-first">First Name *</label>
+              <input type="text" id="c-first" name="first_name" required placeholder="Kai">
+            </div>
+            <div class="form-group">
+              <label for="c-last">Last Name *</label>
+              <input type="text" id="c-last" name="last_name" required placeholder="Nakamura">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="c-phone">Phone Number *</label>
+              <input type="tel" id="c-phone" name="phone" required placeholder="(808) 555-0100">
+            </div>
+            <div class="form-group">
+              <label for="c-email">Email Address *</label>
+              <input type="email" id="c-email" name="email" required placeholder="you@email.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="c-address">Home Address / Neighborhood *</label>
+            <input type="text" id="c-address" name="address" required placeholder="e.g., 123 Kalakaua Ave, Honolulu or Kailua area">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="c-home-size">Home Size</label>
+              <select id="c-home-size" name="home_size">
+                <option value="" disabled selected>Select…</option>
+                <option>Studio / 1 bed</option>
+                <option>2 bedrooms</option>
+                <option>3 bedrooms</option>
+                <option>4+ bedrooms</option>
+                <option>Condo / Apartment</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="c-service-type">Service Type</label>
+              <select id="c-service-type" name="service_type">
+                <option value="" disabled selected>Select…</option>
+                <option>Regular maintenance (weekly/bi-weekly)</option>
+                <option>Monthly cleaning</option>
+                <option>One-time / deep clean</option>
+                <option>Move-in / Move-out</option>
+                <option>Special event preparation</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="c-message">Anything Else We Should Know?</label>
+            <textarea id="c-message" name="message" placeholder="Pets, allergies, specific areas of concern, preferred days/times…"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%; font-size:1.05rem; padding:.85rem;">Request My Free Estimate</button>
+          <p style="font-size:.82rem; color:var(--gray); text-align:center; margin-top:.75rem;">No obligation. We respond within 1 business day.</p>
+        </form>
+      </div>
+
+      <!-- CONTACT INFO -->
+      <div>
+        <div class="contact-info-card">
+          <h3>Get in Touch</h3>
+
+          <div class="contact-info-item">
+            <span class="icon">📞</span>
+            <div>
+              <strong>Phone</strong><br>
+              <a href="tel:8089428080">(808) 942-8080</a><br>
+              <span style="font-size:.85rem; opacity:.8;">Mon–Sat, 8am–5pm HST</span>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <span class="icon">✉️</span>
+            <div>
+              <strong>Email</strong><br>
+              <a href="mailto:maidsofhonolulu@gmail.com">maidsofhonolulu@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <span class="icon">📍</span>
+            <div>
+              <strong>Service Area</strong><br>
+              All of Oahu, Hawaii<br>
+              <span style="font-size:.85rem; opacity:.8;">One team, no franchise boundaries</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--off-wh); border-radius:var(--radius); padding:1.75rem; margin-top:1.5rem;">
+          <h3 style="color:var(--teal-dk); margin-bottom:1rem;">🌺 New Customer Offer</h3>
+          <p>Mention this offer when you call or submit the form to claim your savings:</p>
+          <ul class="checklist" style="margin-top:.75rem;">
+            <li><strong>$10 off</strong> your 1st cleaning</li>
+            <li><strong>$20 off</strong> your 2nd cleaning</li>
+            <li><strong>$20 off</strong> your 3rd cleaning</li>
+          </ul>
+          <p style="margin-top:.75rem; font-size:.9rem; color:var(--gray);">That's <strong>$50 in total savings</strong> for new customers. Valid for recurring service only.</p>
+        </div>
+
+        <div style="background:var(--off-wh); border-radius:var(--radius); padding:1.75rem; margin-top:1rem;">
+          <h3 style="color:var(--teal-dk); margin-bottom:.75rem;">Looking for a Job?</h3>
+          <p style="margin-bottom:1rem; font-size:.9rem;">If you're interested in joining our cleaning team, visit our jobs page.</p>
+          <a href="jobs.html#apply" class="btn btn-teal" style="display:block; text-align:center;">View Cleaning Jobs</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="container">
+    <h2>Prefer to Call?</h2>
+    <p>We're available Monday through Saturday, 8am–5pm. We'd love to hear from you.</p>
+    <div class="cta-actions">
+      <a href="tel:8089428080" class="btn btn-primary">📞 (808) 942-8080</a>
+      <a href="mailto:maidsofhonolulu@gmail.com" class="btn btn-outline">✉️ maidsofhonolulu@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Maids of Honolulu</h3>
+        <p>Professional residential cleaning for all of Oahu. Insured, eco-friendly, and proud to serve our island community with aloha.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About &amp; FAQs</a></li>
+          <li><a href="services.html">Cleaning Services</a></li>
+          <li><a href="jobs.html">Cleaning Jobs</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services/kitchen.html">Kitchen Cleaning</a></li>
+          <li><a href="services/bathroom.html">Bathroom Cleaning</a></li>
+          <li><a href="services/allrooms.html">All-Room Cleaning</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><span class="icon">📞</span><a href="tel:8089428080">(808) 942-8080</a></div>
+        <div class="footer-contact-item"><span class="icon">✉️</span><a href="mailto:maidsofhonolulu@gmail.com">maidsofhonolulu@gmail.com</a></div>
+        <div class="footer-contact-item"><span class="icon">📍</span><span>Serving all of Oahu, Hawaii</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="yr"></span> Maids of Honolulu. All rights reserved.</span>
+      <span>Licensed &amp; Insured | Oahu, Hawaii</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
