@@ -58,151 +58,113 @@
 <!-- PAGE HERO -->
 <section class="page-hero">
   <div class="container">
-    <h1>Contact Us</h1>
-    <p>Ready for a cleaner home? Get your free estimate or just ask us a question — we're here to help.</p>
+    <h1>Contact Our Housecleaning Services Company in Honolulu, HI, Today</h1>
+    <p>It is time to alleviate the stress in your life. Why not have one of our professional cleaners do the housework for you? Contact The Maids, your trusted housecleaning services company in Honolulu, HI, today for high quality housecleaning at unbeatable prices. We accept cash, personal checks, Visa, and MasterCard.</p>
+    <div class="hero-actions" style="margin-top:1.5rem;">
+      <a href="tel:8089428080" class="btn btn-primary">📞 Call (808) 942-8080</a>
+      <a href="mailto:maidsofhonolulu@gmail.com" class="btn btn-outline">✉️ Email maidsofhonolulu@gmail.com</a>
+    </div>
   </div>
 </section>
 
-<!-- CONTACT SECTION -->
+<!-- AREAS + HOURS -->
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title">Areas Served <span>Across Oahu</span></h2>
+    <div style="text-align:center; margin-bottom:1.5rem;">
+      <p><strong>Operating Hours:</strong> Monday to Friday: 8:00 am – 4:00 pm &nbsp;|&nbsp; Saturday to Sunday: Closed</p>
+      <p style="margin-top:.5rem;"><a href="tel:8089428080" class="btn btn-primary" style="margin-top:.75rem; display:inline-block;">📞 Call (808) 942-8080</a></p>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2rem; max-width:800px; margin:0 auto;">
+      <div>
+        <h3 style="color:var(--navy-dk); margin-bottom:.75rem;">Honolulu</h3>
+        <ul style="list-style:none; font-size:.9rem; line-height:1.9;">
+          <li>Honolulu</li><li>Ward Areas</li><li>Waikiki/Kapahulu</li>
+          <li>Kaimuki/Waialae/Kahala</li><li>Kapalama/Liliha</li>
+          <li>Niu Valley/Aina Haina</li><li>Manoa Makiki</li>
+          <li>Hawaii Kai/Queen's Gate</li><li>Mccully/Moiliili</li>
+          <li>Downtown/Punchbowl</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:var(--navy-dk); margin-bottom:.75rem;">Leeward</h3>
+        <ul style="list-style:none; font-size:.9rem; line-height:1.9;">
+          <li>Aiea</li><li>Ewa Beach</li><li>Kalihi/Tripler/Moanalua</li>
+          <li>Kapolei</li><li>Kunia</li><li>Pearl City</li>
+          <li>Salt Lake/Foster Village</li><li>Wahiawa</li>
+          <li>Mililani</li><li>Waipahu</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:var(--navy-dk); margin-bottom:.75rem;">Windward</h3>
+        <ul style="list-style:none; font-size:.9rem; line-height:1.9;">
+          <li>Kailua</li><li>Kaneohe</li><li>Waimanalo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GIFT + SERVICE SECTIONS + FORM -->
 <section class="section" id="estimate-form">
   <div class="container">
     <div class="contact-grid">
 
-      <!-- FORM -->
+      <!-- LEFT: gift + need service -->
       <div>
-        <h2 style="color:var(--navy-dk); margin-bottom:.5rem;">Get Your Free Estimate</h2>
-        <p style="margin-bottom:1.5rem; color:var(--gray);">Fill out the form and we'll get back to you within one business day. New customers save $50!</p>
+        <div style="background:var(--off-wh); border-radius:var(--radius); padding:2rem; margin-bottom:1.5rem;">
+          <h2 style="color:var(--navy-dk); margin-bottom:1rem;">Give the gift of time</h2>
+          <p>Give the gift of time! The Maids Home Services gift certificates are the best way to treat someone to a vacation from housecleaning.</p>
+          <p style="margin-top:.75rem;">The Maids Home Services gift certificates can be used towards any of our services, such as housecleaning, window cleaning and more.</p>
+        </div>
+
+        <div style="background:var(--navy-dk); color:var(--white); border-radius:var(--radius); padding:2rem;">
+          <h2 style="margin-bottom:1rem;">Need Honolulu service?</h2>
+          <p style="opacity:.9;">For the fastest estimate, call the Honolulu office directly. We are focused on helping Honolulu customers get reliable housecleaning service without sending them to the wrong side of the island.</p>
+          <a href="tel:8089428080" class="btn btn-primary" style="margin-top:1.25rem; display:inline-block;">📞 Call (808) 942-8080</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: form -->
+      <div>
+        <h2 style="color:var(--navy-dk); margin-bottom:1rem;">Contact Now For a Free Estimate</h2>
 
         <div class="form-success" id="estimate-form-success">
-          ✅ Thank you! We'll be in touch within one business day with your free estimate.
+          ✅ Thank you! We'll be in touch with your free estimate shortly.
         </div>
 
         <form name="free-estimate" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="contact.html?form=success#estimate-form">
           <input type="hidden" name="form-name" value="free-estimate">
           <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label for="c-first">First Name *</label>
-              <input type="text" id="c-first" name="first_name" required placeholder="Kai">
-            </div>
-            <div class="form-group">
-              <label for="c-last">Last Name *</label>
-              <input type="text" id="c-last" name="last_name" required placeholder="Nakamura">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="c-phone">Phone Number *</label>
-              <input type="tel" id="c-phone" name="phone" required placeholder="(808) 555-0100">
-            </div>
-            <div class="form-group">
-              <label for="c-email">Email Address *</label>
-              <input type="email" id="c-email" name="email" required placeholder="you@email.com">
-            </div>
+          <div class="form-group">
+            <label for="c-name">Name *</label>
+            <input type="text" id="c-name" name="name" required>
           </div>
           <div class="form-group">
-            <label for="c-address">Home Address / Neighborhood *</label>
-            <input type="text" id="c-address" name="address" required placeholder="e.g., Kailua, Hawaii Kai, Pearl City…">
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="c-home-size">Home Size</label>
-              <select id="c-home-size" name="home_size">
-                <option value="" disabled selected>Select…</option>
-                <option>Studio / 1 bed</option>
-                <option>2 bedrooms</option>
-                <option>3 bedrooms</option>
-                <option>4+ bedrooms</option>
-                <option>Condo / Apartment</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="c-service-type">Service Type</label>
-              <select id="c-service-type" name="service_type">
-                <option value="" disabled selected>Select…</option>
-                <option>Regular maintenance (weekly/bi-weekly)</option>
-                <option>Monthly cleaning</option>
-                <option>One-time / deep clean</option>
-                <option>Move-in / Move-out</option>
-                <option>Special event preparation</option>
-                <option>Not sure yet</option>
-              </select>
-            </div>
+            <label for="c-address">Address *</label>
+            <input type="text" id="c-address" name="address" required>
           </div>
           <div class="form-group">
-            <label for="c-message">Anything Else We Should Know?</label>
-            <textarea id="c-message" name="message" placeholder="Pets, allergies, specific areas of concern, preferred days/times…"></textarea>
+            <label for="c-city">City *</label>
+            <input type="text" id="c-city" name="city" required>
           </div>
-          <button type="submit" class="btn btn-primary" style="width:100%; font-size:1.05rem; padding:.85rem;">Request My Free Estimate</button>
-          <p style="font-size:.82rem; color:var(--gray); text-align:center; margin-top:.75rem;">No obligation. We respond within 1 business day.</p>
+          <div class="form-group">
+            <label for="c-phone">Phone *</label>
+            <input type="tel" id="c-phone" name="phone" required>
+          </div>
+          <div class="form-group">
+            <label for="c-email">Email *</label>
+            <input type="email" id="c-email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="c-message">How can we help? *</label>
+            <textarea id="c-message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%; font-size:1.05rem; padding:.85rem;">Submit</button>
         </form>
       </div>
 
-      <!-- CONTACT INFO -->
-      <div>
-        <div class="contact-info-card">
-          <h3>Get in Touch</h3>
-          <div class="contact-info-item">
-            <span class="icon">📞</span>
-            <div>
-              <strong>Phone</strong><br>
-              <a href="tel:8089428080">(808) 942-8080</a><br>
-              <span style="font-size:.85rem; opacity:.8;">Mon–Sat, 8am–5pm HST</span>
-            </div>
-          </div>
-          <div class="contact-info-item">
-            <span class="icon">✉️</span>
-            <div>
-              <strong>Email</strong><br>
-              <a href="mailto:maidsofhonolulu@gmail.com">maidsofhonolulu@gmail.com</a>
-            </div>
-          </div>
-          <div class="contact-info-item">
-            <span class="icon">📍</span>
-            <div>
-              <strong>Service Area</strong><br>
-              All of Oahu, Hawaii<br>
-              <span style="font-size:.85rem; opacity:.8;">One team, no franchise boundaries</span>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top:1.25rem; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);">
-          <img src="https://maidsofhonolulu.com/wp-content/uploads/maids-original/20230116_GJP_1322_RT_LoRes_Web-1920w.jpg"
-               alt="Maids of Honolulu professional cleaner"
-               style="width:100%; height:220px; object-fit:cover; display:block;">
-        </div>
-
-        <div style="background:var(--off-wh); border-radius:var(--radius); padding:1.75rem; margin-top:1.25rem;">
-          <h3 style="color:var(--navy-dk); margin-bottom:1rem;">🌺 New Customer Offer</h3>
-          <ul class="checklist" style="margin-top:.75rem;">
-            <li><strong>$10 off</strong> your 1st cleaning</li>
-            <li><strong>$20 off</strong> your 2nd cleaning</li>
-            <li><strong>$20 off</strong> your 3rd cleaning</li>
-          </ul>
-          <p style="margin-top:.75rem; font-size:.9rem; color:var(--gray);"><strong>$50 total savings</strong> for new customers. Valid for recurring service.</p>
-        </div>
-
-        <div style="background:var(--off-wh); border-radius:var(--radius); padding:1.75rem; margin-top:1rem;">
-          <h3 style="color:var(--navy-dk); margin-bottom:.75rem;">Looking for a Job?</h3>
-          <p style="margin-bottom:1rem; font-size:.9rem;">Interested in joining our cleaning team? Visit our jobs page.</p>
-          <a href="jobs.html#apply" class="btn btn-navy" style="display:block; text-align:center;">View Cleaning Jobs</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CTA BAND -->
-<section class="cta-band">
-  <div class="container">
-    <h2>Prefer to Call?</h2>
-    <p>We're available Monday through Saturday, 8am–5pm. We'd love to hear from you.</p>
-    <div class="cta-actions">
-      <a href="tel:8089428080" class="btn btn-primary">📞 (808) 942-8080</a>
-      <a href="mailto:maidsofhonolulu@gmail.com" class="btn btn-outline">✉️ maidsofhonolulu@gmail.com</a>
     </div>
   </div>
 </section>
