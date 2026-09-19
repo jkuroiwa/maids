@@ -10,6 +10,7 @@ Static brochure site for The Maids of Honolulu, a residential cleaning service c
 ├── about.html              About Us & FAQs
 ├── services.html           Cleaning Services overview
 ├── jobs.html               Cleaning Jobs + application form
+├── estimate.html           Instant Estimate calculator + lead form
 ├── contact.html            Contact Us + free estimate form
 ├── services/
 │   ├── kitchen.html        Kitchen Cleaning subpage
@@ -18,8 +19,9 @@ Static brochure site for The Maids of Honolulu, a residential cleaning service c
 ├── css/
 │   └── style.css           All styles (single file, CSS variables)
 ├── js/
-│   └── main.js             Nav toggle, FAQ accordion, popup, form success
-├── images/                 (add favicon.png and any photos here)
+│   ├── main.js             Nav toggle, FAQ accordion, popup, form success
+│   └── estimate.js         Pricing tables + instant estimate calculator
+├── images/                 Self-hosted photos, logo, icons
 ├── netlify.toml            Netlify publish config + clean-URL redirects
 └── CLAUDE.md               This file
 ```
@@ -34,7 +36,7 @@ Static brochure site for The Maids of Honolulu, a residential cleaning service c
 
 ## Netlify Forms
 
-Two forms are registered with `data-netlify="true"`:
+Three forms are registered with `data-netlify="true"`:
 
 ### 1. Free Estimate (`name="free-estimate"`)
 - **File:** `contact.html`
@@ -48,7 +50,22 @@ Two forms are registered with `data-netlify="true"`:
 - **Success redirect:** `jobs.html?form=success#apply`
 - **Notification:** configure in Netlify dashboard → Forms → cleaning-jobs → Notifications → Email to maidsofhonolulu@gmail.com
 
-Both forms include a `bot-field` honeypot for spam protection (Netlify handles this automatically with `netlify-honeypot`).
+### 3. Instant Estimate (`name="instant-estimate"`)
+- **File:** `estimate.html`, logic in `js/estimate.js`
+- **Fields:** sqft, service_type (onetime/recurring/moveout), frequency, last_cleaned, first_name, last_name, address, city, phone, email, plus hidden estimate_low / estimate_high / estimate_summary (filled by JS with the price shown)
+- **Submit:** AJAX POST to `/` (no redirect); the estimate is revealed only after Netlify accepts the submission. On localhost the estimate shows anyway with a console warning.
+- **Notification:** configure in Netlify dashboard → Forms → instant-estimate → Notifications → Email to maidsofhonolulu@gmail.com
+
+All forms include a `bot-field` honeypot for spam protection (Netlify handles this automatically with `netlify-honeypot`).
+
+## Instant Estimate Pricing
+
+Tables in `js/estimate.js` mirror the spreadsheet `2026 Website Pricing - SF x lo hi.xlsx` (two tabs: "Scheduled Cleans", "move out"). To change prices, edit the arrays there — no other code depends on the numbers.
+
+- **One-time / move-out:** `sqft × rate × multiplier`. Rate is a low/high pair per sq-ft bracket (25 brackets), so the result is a range. Multiplier is by time since last professional clean (0.84 → 1.8). Move-out rates are the first-clean rates + $0.10.
+- **Recurring:** `sqft × rate` per frequency (6) and bracket (24). Bracket 0 (≤437 sq ft) is a flat price, not a rate. Recurring customers are shown the one-time range as their initial clean plus the per-visit price.
+- All figures rounded to the nearest $10.
+- Popup "Claim My Offer" button and every "Get Your Free Estimate" CTA link to `estimate.html`.
 
 ### Post-deploy form setup checklist
 1. Deploy site to Netlify (connect GitHub repo, no build command needed)
@@ -61,7 +78,7 @@ Both forms include a `bot-field` honeypot for spam protection (Netlify handles t
 Defined in every page's HTML with `id="offerPopup"`. Controlled in `js/main.js`:
 - Fires after 2.5s delay on first visit
 - Dismissed state stored in `sessionStorage` (key: `moh_popup_dismissed`) — resets each browser session
-- "Claim My Offer" button navigates to `contact.html#estimate-form`
+- "Claim My Offer" button navigates to `estimate.html` (path resolved from the navbar brand link so sub-pages work)
 - Offer: $10 off 1st cleaning, $20 off 2nd, $20 off 3rd ($50 total)
 
 ## CSS Conventions
@@ -78,12 +95,13 @@ Breakpoints: 768px (tablet/mobile nav), 480px (single-column footer).
 
 Single unified list on `index.html` (39 neighborhoods). Combines the old Honolulu, Windward, and Leeward franchise zones. No franchise routing — one phone number for all.
 
-## Adding Images
+## Images
 
-Place image files in `/images/`. The navbar brand currently renders as text only. To add a logo:
-1. Add `favicon.png` and `logo.png` to `/images/`
-2. In each `<link rel="icon">` tag, the href is already set to `images/favicon.png`
-3. To show a logo in the navbar, add inside `.navbar-brand`: `<img src="images/logo.png" alt="Maids of Honolulu">`
+All images are self-hosted in `/images/` (photos, `the-maids-logo.jpg`, payment icons, social SVG icons, HomeGuide seal). The only remaining external image is the Getty stock photo on `index.html`. Sub-pages and `css/style.css` reference images with `../images/`.
+
+## Local Preview
+
+`.claude/launch.json` defines a `static` server (`python -m http.server 8765`). Form POSTs return 501 locally; the estimate page handles this and still shows the result.
 
 ## Deployment
 

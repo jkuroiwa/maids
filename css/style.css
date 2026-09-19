@@ -740,3 +740,61 @@ p:last-child { margin-bottom: 0; }
   .footer-bottom { flex-direction: column; text-align: center; }
   .photo-grid { grid-template-columns: 1fr; grid-template-rows: repeat(4, 200px); }
 }
+
+/* ===== INSTANT ESTIMATE ===== */
+.estimate-card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2.5rem;
+}
+.estimate-step {
+  color: var(--navy-dk);
+  font-size: 1.15rem;
+  margin: 0 0 1.25rem;
+  padding-bottom: .5rem;
+  border-bottom: 2px solid var(--yellow);
+}
+.estimate-step + .form-group, .form-row + .estimate-step { margin-top: 0; }
+.form-group + .estimate-step, .form-row + .estimate-step { margin-top: 2rem; }
+
+.choice-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; }
+.choice { position: relative; cursor: pointer; }
+.choice input { position: absolute; opacity: 0; width: 0; height: 0; }
+.choice span {
+  display: block;
+  text-align: center;
+  padding: .7rem .5rem;
+  border: 1.5px solid #CFD8DC;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--navy-dk);
+  transition: all var(--trans);
+}
+.choice input:checked + span { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.choice input:focus-visible + span { outline: 2px solid var(--yellow); outline-offset: 2px; }
+
+.estimate-submit { width: 100%; font-size: 1.05rem; padding: .9rem; margin-top: .5rem; }
+.estimate-note { font-size: .85rem; color: var(--gray); text-align: center; margin-top: 1rem; }
+.estimate-error {
+  background: #FDECEA; border: 1px solid #F5C6C2; color: #B3261E;
+  border-radius: var(--radius); padding: .85rem 1rem; margin-top: 1rem; font-size: .95rem;
+}
+
+.estimate-result { text-align: center; }
+.estimate-headline { font-size: 1.1rem; font-weight: 600; color: var(--navy-dk); }
+.estimate-price { font-size: 2.6rem; font-weight: 800; color: var(--navy); line-height: 1.2; margin: .35rem 0; }
+.estimate-detail { color: #555; margin-bottom: 1.5rem; }
+.estimate-offer {
+  background: #FFF8DB; border: 1px solid var(--yellow); border-radius: var(--radius);
+  padding: 1rem 1.25rem; margin-bottom: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .estimate-card { padding: 1.5rem; }
+  .choice-group { grid-template-columns: 1fr; }
+  .estimate-price { font-size: 2.1rem; }
+}

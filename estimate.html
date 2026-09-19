@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instant Estimate | Maids of Honolulu</title>
+  <meta name="description" content="Get an instant price estimate for house cleaning on Oahu. Tell us your home size and what you need, and see your estimate in seconds.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar">
+  Serving all of Oahu for over 30 years &nbsp;|&nbsp; <a href="mailto:maidsofhonolulu@gmail.com">maidsofhonolulu@gmail.com</a>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" role="navigation">
+  <div class="container">
+    <a href="index.html" class="navbar-brand">
+      <img src="images/the-maids-logo.jpg" alt="The Maids of Honolulu">
+    </a>
+    <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About &amp; FAQs</a></li>
+      <li><a href="services.html">Cleaning Services</a></li>
+      <li><a href="estimate.html">Free Estimate</a></li>
+      <li><a href="jobs.html">Cleaning Jobs</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <div class="nav-cta"><a href="tel:8089428080" class="btn btn-primary">📞 Call (808) 942-8080</a></div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Get Your Instant Estimate</h1>
+    <p>Answer a few quick questions and see a price range in seconds.</p>
+  </div>
+</section>
+
+<!-- ESTIMATE FORM -->
+<section class="section" id="estimate">
+  <div class="container">
+    <div class="estimate-card">
+
+      <form id="estimateForm" name="instant-estimate" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/estimate.html">
+        <input type="hidden" name="form-name" value="instant-estimate">
+        <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+        <!-- Filled by JS before submit so the lead includes the price we showed -->
+        <input type="hidden" name="estimate_low" value="">
+        <input type="hidden" name="estimate_high" value="">
+        <input type="hidden" name="estimate_summary" value="">
+
+        <h2 class="estimate-step">1. Your home</h2>
+
+        <div class="form-group">
+          <label for="e-sqft">Approximate square footage *</label>
+          <input type="number" id="e-sqft" name="sqft" inputmode="numeric" min="100" max="20000" step="1" placeholder="e.g. 1200" required>
+        </div>
+
+        <div class="form-group">
+          <label>What do you need? *</label>
+          <div class="choice-group">
+            <label class="choice"><input type="radio" name="service_type" value="onetime" checked><span>One-time cleaning</span></label>
+            <label class="choice"><input type="radio" name="service_type" value="recurring"><span>Recurring cleaning</span></label>
+            <label class="choice"><input type="radio" name="service_type" value="moveout"><span>Move-out cleaning</span></label>
+          </div>
+        </div>
+
+        <div class="form-group" id="frequencyGroup" hidden>
+          <label for="e-frequency">How often? *</label>
+          <select id="e-frequency" name="frequency">
+            <option value="every4">Every 4 weeks</option>
+            <option value="every2">Every 2 weeks</option>
+            <option value="weekly">Weekly</option>
+            <option value="twice">2 times a week</option>
+            <option value="thrice">3 times a week</option>
+            <option value="daily">Daily</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="e-last">When was it last professionally cleaned? *</label>
+          <select id="e-last" name="last_cleaned" required>
+            <option value="" disabled selected>Choose one…</option>
+            <option value="lt_week">Less than a week ago</option>
+            <option value="lt_month">Less than a month ago</option>
+            <option value="1_2_mo">1–2 months ago</option>
+            <option value="2_6_mo">2–6 months ago</option>
+            <option value="6_12_mo">6–12 months ago</option>
+            <option value="1_2_yr">1–2 years ago</option>
+            <option value="2_plus">Over 2 years ago / never</option>
+          </select>
+        </div>
+
+        <h2 class="estimate-step">2. Your contact info</h2>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="e-first">First name *</label>
+            <input type="text" id="e-first" name="first_name" autocomplete="given-name" required>
+          </div>
+          <div class="form-group">
+            <label for="e-last-name">Last name *</label>
+            <input type="text" id="e-last-name" name="last_name" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="e-address">Street address *</label>
+          <input type="text" id="e-address" name="address" autocomplete="street-address" required>
+        </div>
+        <div class="form-group">
+          <label for="e-city">City / neighborhood *</label>
+          <input type="text" id="e-city" name="city" autocomplete="address-level2" placeholder="e.g. Kailua" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="e-phone">Phone *</label>
+            <input type="tel" id="e-phone" name="phone" autocomplete="tel" required>
+          </div>
+          <div class="form-group">
+            <label for="e-email">Email *</label>
+            <input type="email" id="e-email" name="email" autocomplete="email" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary estimate-submit">Show My Estimate</button>
+        <p class="estimate-note">This is a rough estimate. A team member will follow up to confirm your price and schedule. We never share your information.</p>
+        <p class="estimate-error" id="estimateError" hidden>Sorry, something went wrong sending your request. Please try again or call <a href="tel:8089428080">(808) 942-8080</a>.</p>
+      </form>
+
+      <!-- RESULT (revealed after submit) -->
+      <div class="estimate-result" id="estimateResult" hidden>
+        <p class="estimate-headline"></p>
+        <p class="estimate-price"></p>
+        <p class="estimate-detail"></p>
+        <div class="estimate-offer">
+          <strong>New customer?</strong> Take <strong>$50 off</strong> your first three cleanings — $10 off the 1st, $20 off the 2nd, $20 off the 3rd.
+        </div>
+        <p>Mahalo! We've received your details and will call to confirm your price and find a time that works for you.</p>
+        <div class="hero-actions" style="margin-top:1.5rem;">
+          <a href="tel:8089428080" class="btn btn-primary">📞 Call (808) 942-8080</a>
+          <a href="services.html" class="btn btn-navy">See What's Included</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo-box">
+          <img src="images/the-maids-logo.jpg" alt="The Maids of Honolulu">
+        </div>
+        <h4>Contact Information</h4>
+        <p><a href="tel:8089428080">Call (808) 942-8080</a></p>
+        <p style="margin-top:.5rem;"><strong>Email:</strong></p>
+        <p><a href="mailto:maidsofhonolulu@gmail.com">maidsofhonolulu@gmail.com</a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services/kitchen.html">Kitchen Cleaning</a></li>
+          <li><a href="services/bathroom.html">Bathroom Cleaning</a></li>
+          <li><a href="services/allrooms.html">All Room Cleaning</a></li>
+          <li><a href="estimate.html">Free Estimate</a></li>
+          <li><a href="jobs.html">Cleaning Jobs</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-hours">
+        <h4>Business Hours</h4>
+        <p>Mon - Fri : 8:00 am - 4:00 pm</p>
+        <p>Sat - Sun : Closed</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/maidsofhonolulu" class="fb" aria-label="Facebook" target="_blank" rel="noopener">
+            <img src="images/icon-facebook.svg" alt="Facebook">
+          </a>
+          <a href="https://www.yelp.com/biz/maids-of-honolulu" class="yelp" aria-label="Yelp" target="_blank" rel="noopener">
+            <img src="images/icon-yelp.svg" alt="Yelp">
+          </a>
+          <a href="https://g.page/maidsofhonolulu" class="gmb" aria-label="Google Business" target="_blank" rel="noopener">
+            <img src="images/icon-google-business.svg" alt="Google">
+          </a>
+        </div>
+        <h4>Payment</h4>
+        <p>Payment Options:</p>
+        <div class="footer-payment-icons">
+          <img src="images/visa.png" alt="Visa">
+          <img src="images/mastercard.png" alt="Mastercard">
+          <img src="images/cash.png" alt="Cash">
+        </div>
+        <p>Also accept: Personal Checks</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Content, including images, displayed on this website is protected by copyright laws.</span>
+      <span><a href="#">Terms of Use</a> &nbsp;|&nbsp; <a href="#">Privacy Policy</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/estimate.js"></script>
+</body>
+</html>

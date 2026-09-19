@@ -20,3 +20,8 @@
   from = "/contact"
   to = "/contact.html"
   status = 200
+
+[[redirects]]
+  from = "/estimate"
+  to = "/estimate.html"
+  status = 200

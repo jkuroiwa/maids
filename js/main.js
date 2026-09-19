@@ -50,12 +50,9 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   overlay.querySelector('.popup-dismiss')?.addEventListener('click', closePopup);
   overlay.querySelector('.popup-cta')?.addEventListener('click', () => {
     closePopup();
-    const contactPage = 'contact.html';
-    if (!location.pathname.includes(contactPage)) {
-      location.href = contactPage + '#estimate-form';
-    } else {
-      document.getElementById('estimate-form')?.scrollIntoView({ behavior: 'smooth' });
-    }
+    // Resolve the estimate page relative to this page (sub-pages use ../)
+    const brandHref = document.querySelector('.navbar-brand')?.getAttribute('href') || 'index.html';
+    location.href = brandHref.replace('index.html', 'estimate.html');
   });
 
   overlay.addEventListener('click', e => {
