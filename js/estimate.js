@@ -28,7 +28,7 @@ const MOVE_OUT_RATES = [
   [Infinity, 0.41, 0.85],
 ];
 
-/* --- Multiplier by time since last professional cleaning --- */
+/* --- Multiplier by time since the windows were last cleaned --- */
 const LAST_CLEANED = {
   lt_week:  { label: 'Less than a week ago',        mult: 0.84 },
   lt_month: { label: 'Less than a month ago',       mult: 1.00 },
@@ -117,21 +117,22 @@ function formatPhone(raw) {
   form.querySelectorAll('input[name="service_type"]').forEach(r => r.addEventListener('change', syncFrequency));
   syncFrequency();
 
-  /* Headline the low figure ("starting at"); the full low–high range still goes
-     to the office in the form submission. Recurring headlines the per-visit price. */
+  /* Deep clean and move-out show the full low–high range (owner's call);
+     recurring headlines the per-visit price with the initial clean as a range. */
   function renderResult(r) {
+    const range = `${money(r.low)} – ${money(r.high)}`;
     let headline, price, detail;
     if (r.type === 'moveout') {
       headline = 'Move-out cleaning';
-      price = `Starting at ${money(r.low)}`;
+      price = range;
       detail = 'A top-to-bottom clean to get your deposit back.';
     } else if (r.type === 'recurring') {
       headline = `Recurring cleaning, ${RECURRING[r.frequency].label.toLowerCase()}`;
       price = `${money(r.perVisit)} per visit`;
-      detail = `Starts with an initial deep clean from <strong>${money(r.low)}</strong>.`;
+      detail = `Starts with an initial deep clean of <strong>${range}</strong>.`;
     } else {
       headline = 'Deep clean';
-      price = `Starting at ${money(r.low)}`;
+      price = range;
       detail = 'Our full first-time or one-time cleaning.';
     }
     resultEl.querySelector('.estimate-headline').textContent = headline;
@@ -172,7 +173,7 @@ function formatPhone(raw) {
       'Square Feet':   sqft,
       'Service':       SERVICE_LABELS[result.type],
       'Frequency':     result.type === 'recurring' ? RECURRING[result.frequency].label : 'n/a',
-      'Last Cleaned':  LAST_CLEANED[f.last_cleaned.value].label,
+      'Windows Last Cleaned': LAST_CLEANED[f.last_cleaned.value].label,
       'Estimate Low':  result.low,
       'Estimate High': result.high,
     };

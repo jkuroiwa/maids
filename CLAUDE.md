@@ -52,7 +52,7 @@ Three forms are registered with `data-netlify="true"`:
 
 ### 3. Instant Estimate (`name="instant-estimate"`)
 - **File:** `estimate.html`, logic in `js/estimate.js`
-- **Fields submitted:** Estimate, Name, Phone, Email, Address, City, Square Feet, Service, Frequency, Last Cleaned, Estimate Low, Estimate High — all hidden inputs that `estimate.js` fills with human-readable values before posting. The visible inputs are UI only and are not sent, so the notification email reads cleanly.
+- **Fields submitted:** Estimate, Name, Phone, Email, Address, City, Square Feet, Service, Frequency, Windows Last Cleaned, Estimate Low, Estimate High — all hidden inputs that `estimate.js` fills with human-readable values before posting. The visible inputs are UI only and are not sent, so the notification email reads cleanly.
 - **Submit:** AJAX POST to `/` (no redirect); the estimate is revealed only after Netlify accepts the submission. On localhost the estimate shows anyway with a console warning.
 - **Notification:** configure in Netlify dashboard → Forms → instant-estimate → Notifications → Email to maidsofhonolulu@gmail.com
 
@@ -69,7 +69,8 @@ Tables in `js/estimate.js` mirror the spreadsheet `2026 Website Pricing - SF x l
 - **One-time / move-out:** `sqft × rate × multiplier`. Rate is a low/high pair per sq-ft bracket (25 brackets), so the result is a range. Multiplier is by time since last professional clean (0.84 → 1.8). Move-out rates are the first-clean rates + $0.10.
 - **Recurring:** `sqft × rate` per frequency (6) and bracket (24). Bracket 0 (≤437 sq ft) is a flat price, not a rate. Recurring customers are shown the one-time range as their initial clean plus the per-visit price.
 - All figures rounded to the nearest $10.
-- **Display:** the page headlines the LOW figure as "Starting at $X" (recurring headlines the per-visit price); the full low–high range is sent to the office in the form submission but not shown to the customer. Decided Sept 2026 after competitor comparison — competitors show "from $X" prices and our full range looked 2–3× higher.
+- **Display:** deep clean and move-out show the full low–high range; recurring headlines the per-visit price with the initial clean as a range. (Briefly changed to "Starting at $low" in Sept 2026 after a competitor comparison; owner Dan asked for the range back.)
+- The multiplier question is worded "When did you last clean your windows?" (owner's wording — the multiplier sheet is "1st with windows").
 - The "onetime" service is labelled **Deep clean** in the UI.
 - Popup "Claim My Offer" button and every "Get Your Free Estimate" CTA link to `estimate.html`.
 
