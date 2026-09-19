@@ -89,7 +89,7 @@ function estimate({ sqft, service, lastCleaned, frequency }) {
 
 const money = n => '$' + n.toLocaleString('en-US');
 
-const SERVICE_LABELS = { onetime: 'One-time cleaning', recurring: 'Recurring cleaning', moveout: 'Move-out cleaning' };
+const SERVICE_LABELS = { onetime: 'Deep clean (one-time)', recurring: 'Recurring cleaning', moveout: 'Move-out cleaning' };
 
 /* "18083832979" / "808-383-2979" -> "(808) 383-2979"; anything else passes through */
 function formatPhone(raw) {
@@ -117,21 +117,25 @@ function formatPhone(raw) {
   form.querySelectorAll('input[name="service_type"]').forEach(r => r.addEventListener('change', syncFrequency));
   syncFrequency();
 
+  /* Headline the low figure ("starting at"); the full low–high range still goes
+     to the office in the form submission. Recurring headlines the per-visit price. */
   function renderResult(r) {
-    const range = `${money(r.low)} – ${money(r.high)}`;
-    let headline, detail;
+    let headline, price, detail;
     if (r.type === 'moveout') {
-      headline = 'Estimated move-out cleaning';
-      detail = 'A thorough top-to-bottom clean to get your deposit back.';
+      headline = 'Move-out cleaning';
+      price = `Starting at ${money(r.low)}`;
+      detail = 'A top-to-bottom clean to get your deposit back.';
     } else if (r.type === 'recurring') {
-      headline = 'Estimated initial cleaning';
-      detail = `Then about <strong>${money(r.perVisit)} per visit</strong>, ${RECURRING[r.frequency].label.toLowerCase()}.`;
+      headline = `Recurring cleaning, ${RECURRING[r.frequency].label.toLowerCase()}`;
+      price = `${money(r.perVisit)} per visit`;
+      detail = `Starts with an initial deep clean from <strong>${money(r.low)}</strong>.`;
     } else {
-      headline = 'Estimated first cleaning';
-      detail = 'Includes windows and our full 22-step Healthy Touch clean.';
+      headline = 'Deep clean';
+      price = `Starting at ${money(r.low)}`;
+      detail = 'Our full first-time or one-time cleaning.';
     }
     resultEl.querySelector('.estimate-headline').textContent = headline;
-    resultEl.querySelector('.estimate-price').textContent = range;
+    resultEl.querySelector('.estimate-price').textContent = price;
     resultEl.querySelector('.estimate-detail').innerHTML = detail;
     form.hidden = true;
     resultEl.hidden = false;

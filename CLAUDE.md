@@ -58,6 +58,10 @@ Three forms are registered with `data-netlify="true"`:
 
 All forms include a `bot-field` honeypot for spam protection (Netlify handles this automatically with `netlify-honeypot`).
 
+## Services page
+
+`services.html#healthy-touch` lists all 22 Healthy Touch steps (kitchen 8, all rooms 9, bathrooms 3, windows 2), sourced from a sister franchise site. The home-page trust bar has a commented-out Google-rating badge waiting for the real rating and review count.
+
 ## Instant Estimate Pricing
 
 Tables in `js/estimate.js` mirror the spreadsheet `2026 Website Pricing - SF x lo hi.xlsx` (two tabs: "Scheduled Cleans", "move out"). To change prices, edit the arrays there — no other code depends on the numbers.
@@ -65,6 +69,8 @@ Tables in `js/estimate.js` mirror the spreadsheet `2026 Website Pricing - SF x l
 - **One-time / move-out:** `sqft × rate × multiplier`. Rate is a low/high pair per sq-ft bracket (25 brackets), so the result is a range. Multiplier is by time since last professional clean (0.84 → 1.8). Move-out rates are the first-clean rates + $0.10.
 - **Recurring:** `sqft × rate` per frequency (6) and bracket (24). Bracket 0 (≤437 sq ft) is a flat price, not a rate. Recurring customers are shown the one-time range as their initial clean plus the per-visit price.
 - All figures rounded to the nearest $10.
+- **Display:** the page headlines the LOW figure as "Starting at $X" (recurring headlines the per-visit price); the full low–high range is sent to the office in the form submission but not shown to the customer. Decided Sept 2026 after competitor comparison — competitors show "from $X" prices and our full range looked 2–3× higher.
+- The "onetime" service is labelled **Deep clean** in the UI.
 - Popup "Claim My Offer" button and every "Get Your Free Estimate" CTA link to `estimate.html`.
 
 ### Post-deploy form setup checklist
