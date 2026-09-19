@@ -52,7 +52,7 @@ Three forms are registered with `data-netlify="true"`:
 
 ### 3. Instant Estimate (`name="instant-estimate"`)
 - **File:** `estimate.html`, logic in `js/estimate.js`
-- **Fields:** sqft, service_type (onetime/recurring/moveout), frequency, last_cleaned, first_name, last_name, address, city, phone, email, plus hidden estimate_low / estimate_high / estimate_summary (filled by JS with the price shown)
+- **Fields submitted:** Estimate, Name, Phone, Email, Address, City, Square Feet, Service, Frequency, Last Cleaned, Estimate Low, Estimate High — all hidden inputs that `estimate.js` fills with human-readable values before posting. The visible inputs are UI only and are not sent, so the notification email reads cleanly.
 - **Submit:** AJAX POST to `/` (no redirect); the estimate is revealed only after Netlify accepts the submission. On localhost the estimate shows anyway with a console warning.
 - **Notification:** configure in Netlify dashboard → Forms → instant-estimate → Notifications → Email to maidsofhonolulu@gmail.com
 

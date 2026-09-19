@@ -49,10 +49,21 @@
       <form id="estimateForm" name="instant-estimate" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/estimate.html">
         <input type="hidden" name="form-name" value="instant-estimate">
         <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
-        <!-- Filled by JS before submit so the lead includes the price we showed -->
-        <input type="hidden" name="estimate_low" value="">
-        <input type="hidden" name="estimate_high" value="">
-        <input type="hidden" name="estimate_summary" value="">
+        <!-- What actually gets submitted to Netlify. estimate.js fills these with
+             human-readable values; the visible inputs below are UI only. Order here
+             is the order fields appear in the notification email. -->
+        <input type="hidden" name="Estimate" value="">
+        <input type="hidden" name="Name" value="">
+        <input type="hidden" name="Phone" value="">
+        <input type="hidden" name="Email" value="">
+        <input type="hidden" name="Address" value="">
+        <input type="hidden" name="City" value="">
+        <input type="hidden" name="Square Feet" value="">
+        <input type="hidden" name="Service" value="">
+        <input type="hidden" name="Frequency" value="">
+        <input type="hidden" name="Last Cleaned" value="">
+        <input type="hidden" name="Estimate Low" value="">
+        <input type="hidden" name="Estimate High" value="">
 
         <h2 class="estimate-step">1. Your home</h2>
 

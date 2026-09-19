@@ -89,6 +89,14 @@ function estimate({ sqft, service, lastCleaned, frequency }) {
 
 const money = n => '$' + n.toLocaleString('en-US');
 
+const SERVICE_LABELS = { onetime: 'One-time cleaning', recurring: 'Recurring cleaning', moveout: 'Move-out cleaning' };
+
+/* "18083832979" / "808-383-2979" -> "(808) 383-2979"; anything else passes through */
+function formatPhone(raw) {
+  const d = raw.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '');
+  return d.length === 10 ? `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}` : raw.trim();
+}
+
 /* --- Form wiring --- */
 (function initEstimateForm() {
   const form = document.getElementById('estimateForm');
@@ -142,14 +150,28 @@ const money = n => '$' + n.toLocaleString('en-US');
       frequency:   freqSelect.value,
     });
 
-    /* Store what we quoted so it shows up in the Netlify submission */
+    /* Build a human-readable submission (only the hidden fields are sent) */
     let summary = `${money(result.low)} – ${money(result.high)}`;
     if (result.type === 'recurring') {
       summary += ` initial, then ${money(result.perVisit)}/visit ${RECURRING[result.frequency].label.toLowerCase()}`;
     }
-    form.elements.estimate_low.value  = result.low;
-    form.elements.estimate_high.value = result.high;
-    form.elements.estimate_summary.value = summary;
+    const f = form.elements;
+    const payload = {
+      'form-name':     f['form-name'].value,
+      'bot-field':     f['bot-field'].value,
+      'Estimate':      summary,
+      'Name':          `${f.first_name.value.trim()} ${f.last_name.value.trim()}`,
+      'Phone':         formatPhone(f.phone.value),
+      'Email':         f.email.value.trim(),
+      'Address':       f.address.value.trim(),
+      'City':          f.city.value.trim(),
+      'Square Feet':   sqft,
+      'Service':       SERVICE_LABELS[result.type],
+      'Frequency':     result.type === 'recurring' ? RECURRING[result.frequency].label : 'n/a',
+      'Last Cleaned':  LAST_CLEANED[f.last_cleaned.value].label,
+      'Estimate Low':  result.low,
+      'Estimate High': result.high,
+    };
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'Calculating…';
@@ -159,7 +181,7 @@ const money = n => '$' + n.toLocaleString('en-US');
       const res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(form)).toString(),
+        body: new URLSearchParams(payload).toString(),
       });
       const isLocal = ['localhost', '127.0.0.1'].includes(location.hostname);
       if (!res.ok && !isLocal) throw new Error('Netlify responded ' + res.status);
