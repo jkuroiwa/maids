@@ -12,10 +12,12 @@ if (hamburger && navLinks) {
 
 /* --- Active nav link --- */
 (function markActiveLink() {
-  const path = location.pathname.split('/').pop() || 'index.html';
+  // Normalize "index.html", "/", "/about", "about.html" -> "index", "about"
+  // (Netlify's pretty URLs rewrite hrefs to extensionless paths at deploy time)
+  const slug = p => (p.split('/').pop() || 'index').replace(/\.html$/, '') || 'index';
+  const path = slug(location.pathname);
   document.querySelectorAll('.nav-links a').forEach(a => {
-    const href = a.getAttribute('href').split('/').pop();
-    if (href === path) a.classList.add('active');
+    if (slug(a.getAttribute('href')) === path) a.classList.add('active');
   });
 })();
 
@@ -50,9 +52,10 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   overlay.querySelector('.popup-dismiss')?.addEventListener('click', closePopup);
   overlay.querySelector('.popup-cta')?.addEventListener('click', () => {
     closePopup();
-    // Resolve the estimate page relative to this page (sub-pages use ../)
-    const brandHref = document.querySelector('.navbar-brand')?.getAttribute('href') || 'index.html';
-    location.href = brandHref.replace('index.html', 'estimate.html');
+    // Reuse the nav's own link so the path is right on sub-pages and on
+    // Netlify, where hrefs are rewritten to pretty URLs at deploy time
+    const navLink = document.querySelector('.nav-links a[href*="estimate"]');
+    location.href = navLink ? navLink.getAttribute('href') : '/estimate';
   });
 
   overlay.addEventListener('click', e => {
