@@ -38,11 +38,11 @@ Static brochure site for The Maids of Honolulu, a residential cleaning service c
 
 Three forms are registered with `data-netlify="true"`:
 
-### 1. Free Estimate (`name="free-estimate"`)
+### 1. Contact (`name="contact"`)
 - **File:** `contact.html`
-- **Fields:** first_name, last_name, phone, email, address, home_size, service_type, message
-- **Success redirect:** `contact.html?form=success#estimate-form`
-- **Notification:** configure in Netlify dashboard → Forms → free-estimate → Notifications → Email to maidsofhonolulu@gmail.com
+- **Fields:** name, phone, email, message
+- **Success redirect:** `contact.html?form=success#contact-form`
+- Formerly a 6-field `free-estimate` form; replaced by the Instant Estimate page.
 
 ### 2. Cleaning Jobs (`name="cleaning-jobs"`)
 - **File:** `jobs.html`
@@ -71,7 +71,7 @@ Tables in `js/estimate.js` mirror the spreadsheet `2026 Website Pricing - SF x l
 1. Deploy site to Netlify (connect GitHub repo, no build command needed)
 2. Netlify auto-detects forms on first deploy
 3. Go to Netlify dashboard → **Forms** tab
-4. For each form, add an email notification to `maidsofhonolulu@gmail.com`
+4. For each form, add an email notification to `maidsofhonolulu@gmail.com` (currently one "any form" notification goes to jkuroiwa@gmail.com for testing)
 
 ## New Customer Popup
 
