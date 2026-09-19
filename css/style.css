@@ -17,6 +17,9 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
+/* Never let a stray wide element widen the page on phones — it breaks
+   position:fixed (the popup) in mobile browsers */
+html, body { overflow-x: clip; }
 
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
@@ -215,6 +218,12 @@ p:last-child { margin-bottom: 0; }
   object-position: bottom;
   filter: drop-shadow(0 4px 24px rgba(0,0,0,.35));
 }
+
+/* Two side-by-side panels (home: guarantee + estimate) */
+.panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+/* Contact: areas served */
+.areas-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; max-width: 800px; margin: 0 auto; }
+.form-row-3 { grid-template-columns: 1fr 1fr 1fr; }
 
 /* ===== PHOTO GRID ===== */
 .photo-grid {
@@ -546,7 +555,9 @@ p:last-child { margin-bottom: 0; }
   border-radius: 12px;
   max-width: 460px;
   width: 100%;
-  overflow: hidden;
+  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
+  overflow: hidden auto;
   box-shadow: 0 8px 40px rgba(0,0,0,.28);
   animation: popIn .35s ease;
 }
@@ -713,11 +724,14 @@ p:last-child { margin-bottom: 0; }
   .hamburger { display: flex; }
   .navbar { position: relative; }
 
-  .hero { min-height: auto; padding: 48px 0 0; }
+  /* Phones: single column, drop the stacked cutout photo (the background
+     photo already shows the team) so the hero stays one screen tall */
+  .hero { min-height: auto; padding: 0; }
   .hero-inner { grid-template-columns: 1fr; }
-  .hero-img-col { justify-content: center; margin-top: 1.5rem; }
-  .hero-img-col img { max-height: 320px; }
+  .hero-content { padding: 2.5rem 0 2.5rem; }
+  .hero-img-col { display: none; }
   .hero-actions { flex-direction: column; }
+  .panel-grid, .areas-grid, .form-row-3 { grid-template-columns: 1fr; }
 
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: span 2; }
