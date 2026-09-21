@@ -123,6 +123,8 @@ function formatPhone(raw) {
   const groupSelect = document.getElementById('e-group');
   const licenseGrp  = document.getElementById('licenseGroup');
   const licenseIn   = document.getElementById('e-license');
+  const employerGrp = document.getElementById('employerGroup');
+  const employerIn  = document.getElementById('e-employer');
   const freqSelect  = form.elements.frequency;
   const resultEl    = document.getElementById('estimateResult');
   const errorEl     = document.getElementById('estimateError');
@@ -137,11 +139,12 @@ function formatPhone(raw) {
   form.querySelectorAll('input[name="service_type"]').forEach(r => r.addEventListener('change', syncFrequency));
   syncFrequency();
 
-  /* Ask for the license number only for Realtors */
+  /* Realtors: license number. Other discount groups: employer/agency to verify. */
   function syncGroup() {
     const isRealtor = groupSelect.value === 'realtor';
-    licenseGrp.hidden = !isRealtor;
-    licenseIn.required = isRealtor;
+    const isOther   = groupSelect.value !== 'none' && !isRealtor;
+    licenseGrp.hidden = !isRealtor;   licenseIn.required = isRealtor;
+    employerGrp.hidden = !isOther;    employerIn.required = isOther;
   }
   groupSelect.addEventListener('change', syncGroup);
   syncGroup();
@@ -206,7 +209,7 @@ function formatPhone(raw) {
       'Service':       SERVICE_LABELS[result.type],
       'Frequency':     result.type === 'recurring' ? RECURRING[result.frequency].label : 'n/a',
       'Windows Last Cleaned': LAST_CLEANED[f.last_cleaned.value].label,
-      'Discount':      group ? `${group.label} ${Math.round(group.pct * 100)}%` + (groupSelect.value === 'realtor' ? ` — license ${f.license.value.trim().toUpperCase()}` : '') : 'None',
+      'Discount':      group ? `${group.label} ${Math.round(group.pct * 100)}% — ` + (groupSelect.value === 'realtor' ? `license ${f.license.value.trim().toUpperCase()}` : f.employer.value.trim()) : 'None',
       'Estimate Low':  result.low,
       'Estimate High': result.high,
     };

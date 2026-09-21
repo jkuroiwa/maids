@@ -72,7 +72,7 @@ Tables in `js/estimate.js` mirror the spreadsheet `2026 Website Pricing - SF x l
 - **Display:** deep clean and move-out show the full low–high range; recurring headlines the per-visit price with the initial clean as a range. (Briefly changed to "Starting at $low" in Sept 2026 after a competitor comparison; owner Dan asked for the range back.)
 - The multiplier question is worded "When did you last clean your windows?" (owner's wording — the multiplier sheet is "1st with windows").
 - The "onetime" service is labelled **Deep clean** in the UI.
-- **Discounts:** a "Do any of these apply to you?" dropdown — Realtor 8% (reveals a required RB/RS license field), Healthcare worker / Law enforcement / Military / First responder / Educator 5%. Table is `DISCOUNTS` in `estimate.js`. Applied silently — the customer is NOT told (owner's call); the office email gets a `Discount` field like "Realtor 8% — license RS-12345", "Military 5%", or "None", and the estimate summary notes it.
+- **Discounts:** a "Do any of these apply to you?" dropdown — Realtor 8% (reveals a required RB/RS license field), Healthcare worker / Law enforcement / Military / First responder / Educator 5% (reveals a required "Employer or agency" field). Verification happens on the callback / at the first cleaning, not online; the result fine print says "Discounts verified at your first cleaning." Table is `DISCOUNTS` in `estimate.js`. Applied silently — the customer is NOT told (owner's call); the office email gets a `Discount` field like "Realtor 8% — license RS-12345", "Military 5%", or "None", and the estimate summary notes it.
 - Popup "Claim My Offer" button and every "Get Your Free Estimate" CTA link to `estimate.html`.
 
 ### Post-deploy form setup checklist
