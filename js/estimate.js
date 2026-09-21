@@ -154,7 +154,6 @@ function formatPhone(raw) {
       price = range;
       detail = 'Our full first-time or one-time cleaning.';
     }
-    document.getElementById('estimateDiscount').hidden = !r.realtor;
     resultEl.querySelector('.estimate-headline').textContent = headline;
     resultEl.querySelector('.estimate-price').textContent = price;
     resultEl.querySelector('.estimate-detail').innerHTML = detail;

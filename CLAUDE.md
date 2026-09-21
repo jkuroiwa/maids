@@ -72,7 +72,7 @@ Tables in `js/estimate.js` mirror the spreadsheet `2026 Website Pricing - SF x l
 - **Display:** deep clean and move-out show the full low–high range; recurring headlines the per-visit price with the initial clean as a range. (Briefly changed to "Starting at $low" in Sept 2026 after a competitor comparison; owner Dan asked for the range back.)
 - The multiplier question is worded "When did you last clean your windows?" (owner's wording — the multiplier sheet is "1st with windows").
 - The "onetime" service is labelled **Deep clean** in the UI.
-- **Realtor discount:** an "Are you a Realtor?" checkbox reveals a required RB/RS license field and takes 8% off every figure (`REALTOR_DISCOUNT` in `estimate.js`). The submission says "Yes — license RS-12345" or "No".
+- **Realtor discount:** an "Are you a Realtor?" checkbox reveals a required RB/RS license field and silently takes 8% off every figure (`REALTOR_DISCOUNT` in `estimate.js`) — the customer is NOT told about the discount (owner's call); only the office email notes it. The submission says "Yes — license RS-12345" or "No".
 - Popup "Claim My Offer" button and every "Get Your Free Estimate" CTA link to `estimate.html`.
 
 ### Post-deploy form setup checklist
