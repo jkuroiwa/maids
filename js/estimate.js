@@ -89,6 +89,14 @@ function estimate({ sqft, service, lastCleaned, frequency }) {
 
 const money = n => '$' + n.toLocaleString('en-US');
 
+const REALTOR_DISCOUNT = 0.08;
+
+/* Apply the Realtor discount to every dollar figure in a result */
+function discount(r) {
+  const d = n => round10(n * (1 - REALTOR_DISCOUNT));
+  return { ...r, low: d(r.low), high: d(r.high), ...(r.perVisit != null && { perVisit: d(r.perVisit) }), realtor: true };
+}
+
 const SERVICE_LABELS = { onetime: 'Deep clean (one-time)', recurring: 'Recurring cleaning', moveout: 'Move-out cleaning' };
 
 /* "18083832979" / "808-383-2979" -> "(808) 383-2979"; anything else passes through */
@@ -103,6 +111,9 @@ function formatPhone(raw) {
   if (!form) return;
 
   const freqGroup   = document.getElementById('frequencyGroup');
+  const realtorBox  = document.getElementById('e-realtor');
+  const licenseGrp  = document.getElementById('licenseGroup');
+  const licenseIn   = document.getElementById('e-license');
   const freqSelect  = form.elements.frequency;
   const resultEl    = document.getElementById('estimateResult');
   const errorEl     = document.getElementById('estimateError');
@@ -116,6 +127,14 @@ function formatPhone(raw) {
   }
   form.querySelectorAll('input[name="service_type"]').forEach(r => r.addEventListener('change', syncFrequency));
   syncFrequency();
+
+  /* Ask for the license number only if they say they're a Realtor */
+  function syncRealtor() {
+    licenseGrp.hidden = !realtorBox.checked;
+    licenseIn.required = realtorBox.checked;
+  }
+  realtorBox.addEventListener('change', syncRealtor);
+  syncRealtor();
 
   /* Deep clean and move-out show the full low–high range (owner's call);
      recurring headlines the per-visit price with the initial clean as a range. */
@@ -135,6 +154,7 @@ function formatPhone(raw) {
       price = range;
       detail = 'Our full first-time or one-time cleaning.';
     }
+    document.getElementById('estimateDiscount').hidden = !r.realtor;
     resultEl.querySelector('.estimate-headline').textContent = headline;
     resultEl.querySelector('.estimate-price').textContent = price;
     resultEl.querySelector('.estimate-detail').innerHTML = detail;
@@ -148,18 +168,21 @@ function formatPhone(raw) {
     if (!form.reportValidity()) return;
 
     const sqft = parseInt(form.elements.sqft.value, 10);
-    const result = estimate({
+    let result = estimate({
       sqft,
       service:     form.elements.service_type.value,
       lastCleaned: form.elements.last_cleaned.value,
       frequency:   freqSelect.value,
     });
+    const isRealtor = realtorBox.checked;
+    if (isRealtor) result = discount(result);
 
     /* Build a human-readable submission (only the hidden fields are sent) */
     let summary = `${money(result.low)} – ${money(result.high)}`;
     if (result.type === 'recurring') {
       summary += ` initial, then ${money(result.perVisit)}/visit ${RECURRING[result.frequency].label.toLowerCase()}`;
     }
+    if (isRealtor) summary += ' (8% Realtor discount applied)';
     const f = form.elements;
     const payload = {
       'form-name':     f['form-name'].value,
@@ -169,11 +192,12 @@ function formatPhone(raw) {
       'Phone':         formatPhone(f.phone.value),
       'Email':         f.email.value.trim(),
       'Address':       f.address.value.trim(),
-      'City':          f.city.value.trim(),
+      'Zip':           f.zip.value.trim(),
       'Square Feet':   sqft,
       'Service':       SERVICE_LABELS[result.type],
       'Frequency':     result.type === 'recurring' ? RECURRING[result.frequency].label : 'n/a',
       'Windows Last Cleaned': LAST_CLEANED[f.last_cleaned.value].label,
+      'Realtor':       isRealtor ? `Yes — license ${f.license.value.trim().toUpperCase()}` : 'No',
       'Estimate Low':  result.low,
       'Estimate High': result.high,
     };

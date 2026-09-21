@@ -838,3 +838,12 @@ p:last-child { margin-bottom: 0; }
 @media (max-width: 768px) {
   .how-grid, .types-grid, .steps-grid { grid-template-columns: 1fr; gap: 1.5rem; }
 }
+
+/* Estimate: Realtor checkbox + discount line */
+.check-label { display: flex; align-items: center; gap: .6rem; font-weight: 600; color: var(--navy-dk); cursor: pointer; }
+.check-label input { width: 18px; height: 18px; accent-color: var(--navy); }
+.check-hint { font-weight: 400; color: var(--gray); font-size: .9rem; }
+.estimate-discount {
+  display: inline-block; background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7;
+  border-radius: 999px; padding: .3rem .9rem; font-size: .85rem; font-weight: 700; margin-bottom: 1.25rem;
+}
