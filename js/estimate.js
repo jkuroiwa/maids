@@ -89,12 +89,21 @@ function estimate({ sqft, service, lastCleaned, frequency }) {
 
 const money = n => '$' + n.toLocaleString('en-US');
 
-const REALTOR_DISCOUNT = 0.08;
+/* Discounts by customer group. Applied silently — the customer isn't told
+   (owner's call); only the office email notes it. */
+const DISCOUNTS = {
+  realtor:    { label: 'Realtor',           pct: 0.08 },
+  healthcare: { label: 'Healthcare worker', pct: 0.05 },
+  law:        { label: 'Law enforcement',   pct: 0.05 },
+  military:   { label: 'Military',          pct: 0.05 },
+  responder:  { label: 'First responder',   pct: 0.05 },
+  educator:   { label: 'Educator',          pct: 0.05 },
+};
 
-/* Apply the Realtor discount to every dollar figure in a result */
-function discount(r) {
-  const d = n => round10(n * (1 - REALTOR_DISCOUNT));
-  return { ...r, low: d(r.low), high: d(r.high), ...(r.perVisit != null && { perVisit: d(r.perVisit) }), realtor: true };
+/* Apply a percentage discount to every dollar figure in a result */
+function discount(r, pct) {
+  const d = n => round10(n * (1 - pct));
+  return { ...r, low: d(r.low), high: d(r.high), ...(r.perVisit != null && { perVisit: d(r.perVisit) }) };
 }
 
 const SERVICE_LABELS = { onetime: 'Deep clean (one-time)', recurring: 'Recurring cleaning', moveout: 'Move-out cleaning' };
@@ -111,7 +120,7 @@ function formatPhone(raw) {
   if (!form) return;
 
   const freqGroup   = document.getElementById('frequencyGroup');
-  const realtorBox  = document.getElementById('e-realtor');
+  const groupSelect = document.getElementById('e-group');
   const licenseGrp  = document.getElementById('licenseGroup');
   const licenseIn   = document.getElementById('e-license');
   const freqSelect  = form.elements.frequency;
@@ -128,13 +137,14 @@ function formatPhone(raw) {
   form.querySelectorAll('input[name="service_type"]').forEach(r => r.addEventListener('change', syncFrequency));
   syncFrequency();
 
-  /* Ask for the license number only if they say they're a Realtor */
-  function syncRealtor() {
-    licenseGrp.hidden = !realtorBox.checked;
-    licenseIn.required = realtorBox.checked;
+  /* Ask for the license number only for Realtors */
+  function syncGroup() {
+    const isRealtor = groupSelect.value === 'realtor';
+    licenseGrp.hidden = !isRealtor;
+    licenseIn.required = isRealtor;
   }
-  realtorBox.addEventListener('change', syncRealtor);
-  syncRealtor();
+  groupSelect.addEventListener('change', syncGroup);
+  syncGroup();
 
   /* Deep clean and move-out show the full low–high range (owner's call);
      recurring headlines the per-visit price with the initial clean as a range. */
@@ -173,15 +183,15 @@ function formatPhone(raw) {
       lastCleaned: form.elements.last_cleaned.value,
       frequency:   freqSelect.value,
     });
-    const isRealtor = realtorBox.checked;
-    if (isRealtor) result = discount(result);
+    const group = DISCOUNTS[groupSelect.value];
+    if (group) result = discount(result, group.pct);
 
     /* Build a human-readable submission (only the hidden fields are sent) */
     let summary = `${money(result.low)} – ${money(result.high)}`;
     if (result.type === 'recurring') {
       summary += ` initial, then ${money(result.perVisit)}/visit ${RECURRING[result.frequency].label.toLowerCase()}`;
     }
-    if (isRealtor) summary += ' (8% Realtor discount applied)';
+    if (group) summary += ` (${Math.round(group.pct * 100)}% ${group.label} discount applied)`;
     const f = form.elements;
     const payload = {
       'form-name':     f['form-name'].value,
@@ -196,7 +206,7 @@ function formatPhone(raw) {
       'Service':       SERVICE_LABELS[result.type],
       'Frequency':     result.type === 'recurring' ? RECURRING[result.frequency].label : 'n/a',
       'Windows Last Cleaned': LAST_CLEANED[f.last_cleaned.value].label,
-      'Realtor':       isRealtor ? `Yes — license ${f.license.value.trim().toUpperCase()}` : 'No',
+      'Discount':      group ? `${group.label} ${Math.round(group.pct * 100)}%` + (groupSelect.value === 'realtor' ? ` — license ${f.license.value.trim().toUpperCase()}` : '') : 'None',
       'Estimate Low':  result.low,
       'Estimate High': result.high,
     };

@@ -62,7 +62,7 @@
         <input type="hidden" name="Service" value="">
         <input type="hidden" name="Frequency" value="">
         <input type="hidden" name="Windows Last Cleaned" value="">
-        <input type="hidden" name="Realtor" value="">
+        <input type="hidden" name="Discount" value="">
         <input type="hidden" name="Estimate Low" value="">
         <input type="hidden" name="Estimate High" value="">
 
@@ -140,7 +140,16 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="check-label"><input type="checkbox" id="e-realtor" name="realtor"> Are you a Realtor?</label>
+          <label for="e-group">Do any of these apply to you?</label>
+          <select id="e-group" name="group">
+            <option value="none" selected>No</option>
+            <option value="realtor">Realtor</option>
+            <option value="healthcare">Healthcare worker</option>
+            <option value="law">Law enforcement</option>
+            <option value="military">Military</option>
+            <option value="responder">First responder</option>
+            <option value="educator">Educator</option>
+          </select>
         </div>
         <div class="form-group" id="licenseGroup" hidden>
           <label for="e-license">RB / RS license number *</label>
