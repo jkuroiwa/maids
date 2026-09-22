@@ -20,7 +20,8 @@ Static brochure site for The Maids of Honolulu, a residential cleaning service c
 │   └── style.css           All styles (single file, CSS variables)
 ├── js/
 │   ├── main.js             Nav toggle, FAQ accordion, popup, form success
-│   └── estimate.js         Pricing tables + instant estimate calculator
+│   ├── estimate.js         Pricing tables + instant estimate calculator
+│   └── ga.js               Google Analytics 4 loader + lead events (set GA_ID here)
 ├── images/                 Self-hosted photos, logo, icons
 ├── netlify.toml            Netlify publish config + clean-URL redirects
 └── CLAUDE.md               This file
@@ -106,6 +107,10 @@ Single unified list on `index.html` (39 neighborhoods). Combines the old Honolul
 ## Images
 
 All images are self-hosted in `/images/` (photos, `the-maids-logo.jpg`, payment icons, social SVG icons, HomeGuide seal). The only remaining external image is the Getty stock photo on `index.html`. Sub-pages and `css/style.css` reference images with `../images/`.
+
+## Analytics
+
+`js/ga.js` is loaded in every page's `<head>`. Set `GA_ID` to the GA4 Measurement ID; with the placeholder nothing loads. It sends a `generate_lead` event on every successful form submit: `form_name` is `instant-estimate` (with `service`, `value` = per-visit or low estimate, `discount_group`), `contact`, or `cleaning-jobs`. Mark `generate_lead` as a key event in GA4 to get lead counts and conversion rate.
 
 ## Local Preview
 

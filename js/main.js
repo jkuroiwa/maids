@@ -71,6 +71,9 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     if (successEl) {
       successEl.style.display = 'block';
       successEl.scrollIntoView({ behavior: 'smooth' });
+      if (typeof trackLead === 'function') {
+        trackLead(location.pathname.includes('jobs') ? 'cleaning-jobs' : 'contact');
+      }
     }
   }
 })();

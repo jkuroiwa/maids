@@ -228,6 +228,9 @@ function formatPhone(raw) {
       if (!res.ok && !isLocal) throw new Error('Netlify responded ' + res.status);
       if (!res.ok) console.warn('Local preview: form not submitted (no Netlify), showing estimate anyway.');
       renderResult(result);
+      if (typeof trackLead === 'function') {
+        trackLead('instant-estimate', { service: result.type, value: result.type === 'recurring' ? result.perVisit : result.low, currency: 'USD', discount_group: groupSelect.value });
+      }
     } catch (err) {
       console.error(err);
       errorEl.hidden = false;
