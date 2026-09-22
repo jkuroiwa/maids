@@ -5,7 +5,7 @@
 window.dataLayer = window.dataLayer || [];
 if (typeof gtag !== 'function') { function gtag() { dataLayer.push(arguments); } }
 
-/* Lead events — called from estimate.js and main.js on successful submits */
+/* Lead events, called from estimate.js and main.js on successful submits */
 function trackLead(form, extra) {
   gtag('event', 'generate_lead', Object.assign({ form_name: form }, extra || {}));
 }

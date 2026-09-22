@@ -1,4 +1,4 @@
-/* ===== MAIDS OF HONOLULU — main.js ===== */
+/* ===== MAIDS OF HONOLULU main.js ===== */
 
 /* --- Mobile nav toggle --- */
 const hamburger = document.querySelector('.hamburger');

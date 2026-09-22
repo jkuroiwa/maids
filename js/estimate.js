@@ -1,4 +1,4 @@
-/* ===== MAIDS OF HONOLULU — estimate.js =====
+/* ===== MAIDS OF HONOLULU estimate.js =====
    Instant estimate calculator. Pricing tables mirror
    "2026 Website Pricing - SF x lo hi.xlsx".
 
@@ -7,7 +7,7 @@
 */
 
 /* --- Sq-ft brackets for one-time / move-out cleans.
-   [maxSqFt, lowRate, highRate] — first bracket whose max >= sqft wins. --- */
+   [maxSqFt, lowRate, highRate]. First bracket whose max >= sqft wins. --- */
 const FIRST_CLEAN_RATES = [
   [357,  0.90, 1.30], [457,  0.80, 1.20], [557,  0.70, 1.16], [657,  0.66, 1.12],
   [757,  0.62, 1.08], [857,  0.60, 1.04], [957,  0.58, 1.02], [1057, 0.56, 1.00],
@@ -89,7 +89,7 @@ function estimate({ sqft, service, lastCleaned, frequency }) {
 
 const money = n => '$' + n.toLocaleString('en-US');
 
-/* Discounts by customer group. Applied silently — the customer isn't told
+/* Discounts by customer group. Applied silently. The customer isn't told
    (owner's call); only the office email notes it. */
 const DISCOUNTS = {
   realtor:    { label: 'Realtor',           pct: 0.08 },
@@ -106,8 +106,8 @@ function discount(r, pct) {
   return { ...r, low: d(r.low), high: d(r.high), ...(r.perVisit != null && { perVisit: d(r.perVisit) }) };
 }
 
-/* Dan's operating regions by zip. Not a coverage boundary — he's licensed for
-   all of Oahu — this just labels the lead so the office can route crews. */
+/* Dan's operating regions by zip. Not a coverage boundary; he's licensed for
+   all of Oahu. This just labels the lead so the office can route crews. */
 const ZIP_AREAS = {
   '96825': ['Town', 'Hawaii Kai'],          '96821': ['Town', 'Aina Haina / Niu Valley'],
   '96816': ['Town', 'Kaimuki / Kahala'],    '96813': ['Town', 'Downtown / Nuuanu'],
@@ -228,7 +228,7 @@ function formatPhone(raw) {
       'Service':       SERVICE_LABELS[result.type],
       'Frequency':     result.type === 'recurring' ? RECURRING[result.frequency].label : 'n/a',
       'Windows Last Cleaned': LAST_CLEANED[f.last_cleaned.value].label,
-      'Discount':      group ? `${group.label} ${Math.round(group.pct * 100)}% — ` + (groupSelect.value === 'realtor' ? `license ${f.license.value.trim().toUpperCase()}` : f.employer.value.trim()) : 'None',
+      'Discount':      group ? `${group.label} ${Math.round(group.pct * 100)}%: ` + (groupSelect.value === 'realtor' ? `license ${f.license.value.trim().toUpperCase()}` : f.employer.value.trim()) : 'None',
       'Estimate Low':  result.low,
       'Estimate High': result.high,
     };

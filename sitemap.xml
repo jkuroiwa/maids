@@ -31,6 +31,30 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://maidsofhonolulu.com/areas/hawaii-kai</loc>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maidsofhonolulu.com/areas/kapolei</loc>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maidsofhonolulu.com/areas/kaimuki</loc>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maidsofhonolulu.com/areas/mililani</loc>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://maidsofhonolulu.com/services/kitchen</loc>
     <lastmod>2026-09-22</lastmod>
     <changefreq>yearly</changefreq>
