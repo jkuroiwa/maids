@@ -173,10 +173,11 @@ p:last-child { margin-bottom: 0; }
 
 .hero-inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   align-items: flex-end;
   gap: 2rem;
 }
+.hero-content { max-width: 620px; }
 
 .hero-content { color: var(--white); padding: 3rem 0 2rem; }
 .hero-content h1 { margin-bottom: 1rem; }
