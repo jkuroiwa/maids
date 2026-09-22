@@ -106,6 +106,24 @@ function discount(r, pct) {
   return { ...r, low: d(r.low), high: d(r.high), ...(r.perVisit != null && { perVisit: d(r.perVisit) }) };
 }
 
+/* Dan's operating regions by zip. Not a coverage boundary — he's licensed for
+   all of Oahu — this just labels the lead so the office can route crews. */
+const ZIP_AREAS = {
+  '96825': ['Town', 'Hawaii Kai'],          '96821': ['Town', 'Aina Haina / Niu Valley'],
+  '96816': ['Town', 'Kaimuki / Kahala'],    '96813': ['Town', 'Downtown / Nuuanu'],
+  '96814': ['Town', 'Ala Moana / Kakaako'], '96817': ['Town', 'Liliha / Kalihi'],
+  '96734': ['Windward', 'Kailua'],          '96744': ['Windward', 'Kaneohe'],
+  '96701': ['Leeward', 'Aiea'],             '96818': ['Leeward', 'Moanalua / Salt Lake'],
+  '96782': ['Leeward', 'Pearl City'],       '96797': ['Leeward', 'Waipahu'],
+  '96789': ['Leeward', 'Mililani'],         '96706': ['Leeward', 'Ewa Beach'],
+  '96707': ['Leeward', 'Kapolei'],
+};
+
+function regionFor(zip) {
+  const a = ZIP_AREAS[String(zip).trim()];
+  return a ? `${a[0]} (${a[1]})` : 'Other Oahu';
+}
+
 const SERVICE_LABELS = { onetime: 'Deep clean (one-time)', recurring: 'Recurring cleaning', moveout: 'Move-out cleaning' };
 
 /* "18083832979" / "808-383-2979" -> "(808) 383-2979"; anything else passes through */
@@ -205,6 +223,7 @@ function formatPhone(raw) {
       'Email':         f.email.value.trim(),
       'Address':       f.address.value.trim(),
       'Zip':           f.zip.value.trim(),
+      'Region':        regionFor(f.zip.value),
       'Square Feet':   sqft,
       'Service':       SERVICE_LABELS[result.type],
       'Frequency':     result.type === 'recurring' ? RECURRING[result.frequency].label : 'n/a',
