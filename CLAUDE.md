@@ -116,6 +116,15 @@ All images are self-hosted in `/images/` (photos, `the-maids-logo.jpg`, payment 
 
 `.claude/launch.json` defines a `static` server (`python -m http.server 8765`). Form POSTs return 501 locally; the estimate page handles this and still shows the result.
 
+## Domain (maidsofhonolulu.com)
+
+Registered at GoDaddy (account held by the former owner, Arun Savara / Mira's Cleaning Service). As of Sept 2026 the nameservers point to Cloudflare (`anna.ns.cloudflare.com`, `tim.ns.cloudflare.com`) and the domain still serves the old WordPress site. Plan: switch nameservers to Netlify DNS ("Route B"). No MX records exist (email is gmail.com). TXT records to carry over to Netlify DNS on `@`:
+
+- `google-site-verification=Gn5L0sDwHf-oFXEA8nDbLbJZlw86NTuyIj-QfAuXi7Y` (pre-existing)
+- `google-site-verification=M9xXHSgPnASNQazWZTPzFOx-vpJBVIkIoGh7h7o_nXk` (Search Console, Sept 2026; also present as a meta tag on `index.html`)
+
+GA4 Measurement ID: `G-S1BSSN4SJ4`.
+
 ## Deployment
 
 - **Platform:** Netlify (static)
