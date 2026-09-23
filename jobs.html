@@ -112,6 +112,8 @@
       <form name="cleaning-jobs" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="jobs.html?form=success#apply">
         <input type="hidden" name="form-name" value="cleaning-jobs">
         <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+          <!-- Filled by main.js on submit so each notification gets its own subject -->
+          <input type="hidden" name="subject" value="">
 
         <!-- Personal Info -->
         <div class="form-row">

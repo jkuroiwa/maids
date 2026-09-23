@@ -124,7 +124,17 @@ function regionFor(zip) {
   return a ? `${a[0]} (${a[1]})` : 'Other Oahu';
 }
 
+/* Short location for the email subject: "Kailua 96734", or just the zip
+   if it is outside Dan's listed areas. */
+function subjectAreaFor(zip) {
+  const z = String(zip).trim();
+  const a = ZIP_AREAS[z];
+  return a ? `${a[1]} ${z}` : z;
+}
+
 const SERVICE_LABELS = { onetime: 'Deep clean (one-time)', recurring: 'Recurring cleaning', moveout: 'Move-out cleaning' };
+/* Shorter forms for the email subject line */
+const SERVICE_SHORT = { onetime: 'Deep clean', recurring: 'Recurring', moveout: 'Move-out' };
 
 /* "18083832979" / "808-383-2979" -> "(808) 383-2979"; anything else passes through */
 function formatPhone(raw) {
@@ -214,9 +224,15 @@ function formatPhone(raw) {
     }
     if (group) summary += ` (${Math.round(group.pct * 100)}% ${group.label} discount applied)`;
     const f = form.elements;
+    /* Unique per submission so Gmail does not thread them all together */
+    const subject = `${SERVICE_SHORT[result.type]}: `
+      + `${f.first_name.value.trim()} ${f.last_name.value.trim()}, `
+      + subjectAreaFor(f.zip.value);
+
     const payload = {
       'form-name':     f['form-name'].value,
       'bot-field':     f['bot-field'].value,
+      'subject':       subject,
       'Estimate':      summary,
       'Name':          `${f.first_name.value.trim()} ${f.last_name.value.trim()}`,
       'Phone':         formatPhone(f.phone.value),

@@ -79,6 +79,9 @@
       <form id="estimateForm" name="instant-estimate" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/estimate.html">
         <input type="hidden" name="form-name" value="instant-estimate">
         <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+        <!-- Netlify uses a field named "subject" as the notification email subject.
+             estimate.js fills it per submission so Gmail does not thread them. -->
+        <input type="hidden" name="subject" value="">
         <!-- What actually gets submitted to Netlify. estimate.js fills these with
              human-readable values; the visible inputs below are UI only. Order here
              is the order fields appear in the notification email. -->

@@ -58,6 +58,8 @@ Copy should stay short. The original franchise site was verbose and it was delib
 
 Three forms are registered with `data-netlify="true"`. All include a `bot-field` honeypot.
 
+**Every form has a hidden `subject` field.** Netlify uses a field named `subject` as the notification email subject line. Without it the subject is constant and Gmail threads every submission into one stacked conversation, which hid new leads. The estimate form fills it in `estimate.js` (`Deep clean: Emma Giguere, Downtown / Nuuanu 96813`); the contact and jobs forms are plain posts, so `main.js` fills theirs on submit (`Message: Steven Scogna`, `Job application: Maria Santos`). Keep these unique per submission.
+
 ### 1. Contact (`name="contact"`)
 - **File:** `contact.html`
 - **Fields:** name, phone, email, message

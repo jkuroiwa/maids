@@ -63,6 +63,23 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
 })();
 
+/* --- Unique email subjects so Gmail does not thread notifications --- */
+(function setFormSubjects() {
+  const val = (form, name) => (form.querySelector(`[name="${name}"]`)?.value || '').trim();
+  const SUBJECTS = {
+    'contact':       f => `Message: ${val(f, 'name') || 'website visitor'}`,
+    'cleaning-jobs': f => `Job application: ${[val(f, 'first_name'), val(f, 'last_name')].filter(Boolean).join(' ') || 'applicant'}`,
+  };
+  for (const [name, build] of Object.entries(SUBJECTS)) {
+    const form = document.querySelector(`form[name="${name}"]`);
+    if (!form) continue;
+    form.addEventListener('submit', () => {
+      const field = form.querySelector('[name="subject"]');
+      if (field) field.value = build(form);
+    });
+  }
+})();
+
 /* --- Netlify form success redirect handling --- */
 (function handleFormSuccess() {
   const params = new URLSearchParams(location.search);
