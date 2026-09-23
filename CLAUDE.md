@@ -111,6 +111,8 @@ The Contact page lists main areas by region as examples under a "We serve all of
 
 Six pages under `areas/` target local searches ("house cleaning kailua"). Each has its own title, description, canonical, OG tags and `Service` JSON-LD with `areaServed`, and each is linked from the Contact page area list so none is orphaned.
 
+The shared nav and footer are copied into each page by hand (no build step). **When copying the shell from `services/` into `areas/`, fix the footer service links:** inside `services/` they are siblings (`kitchen.html`), which silently 404 from `areas/`. They must read `../services/kitchen.html`. This broke 18 links before it was caught.
+
 **Content must stay genuinely distinct per area.** Near-duplicate pages that only swap the place name are doorway pages and get penalized. Each page is built on a real local difference: windward salt and humidity (Kailua), military PCS move-outs (Pearl City), square footage and marina air (Hawaii Kai), red dirt and commuting (Kapolei), jalousie windows and old housing stock (Kaimuki), damp and mildew (Mililani). Pairwise word overlap is 31 to 37 percent, which is just shared vocabulary. Keep it there.
 
 ## Services page
@@ -165,6 +167,14 @@ All colors are CSS variables in `:root` (see `css/style.css`): `--navy`, `--navy
 Breakpoints: 768px (tablet/mobile nav, grids collapse to one column), 600px, 480px (single-column footer).
 
 Layout grids belong in CSS classes, not inline `style="grid-template-columns:..."`. A hard-coded two-column inline grid on the home page once made the page 461px wide on a 375px phone, which broke `position: fixed` and mis-rendered the popup. `html, body { overflow-x: clip }` is a safety net against a repeat.
+
+## Security posture
+
+Reviewed Sept 2026. No secrets in the repo, no XSS path (the single `innerHTML` in `estimate.js` receives only computed currency values and fixed table labels, never user input; form data goes straight into a `URLSearchParams` POST body). All 48 external links carry `rel="noopener"`. HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy and Permissions-Policy are set in `netlify.toml`. **No CSP**, which would need care around the inline gtag snippet.
+
+Known and accepted: the pricing tables and discount percentages are readable in `js/estimate.js`, and the discount dropdown is client-side, so a visitor could claim a discount they are not entitled to or tamper with the posted estimate. Both are mitigated by Dan confirming every price by phone and verifying eligibility at the first cleaning. There is no server-side logic to attack.
+
+**Open gap: no privacy policy.** The estimate form collects name, street address, zip, phone, email, and for discounts a real estate license number or employer name. The footer's Terms and Privacy links were removed in Sept 2026 because they pointed nowhere.
 
 ## Local Preview
 
